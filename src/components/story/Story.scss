@@ -1,9 +1,10 @@
 @import '/src/utils/shared-styles.scss';
 
 .story {
-  // &__title-container {
-  //   align-self: flex-end;
-  // }
+  &__title-container {
+    align-self: flex-end;
+    width: 50%;
+  }
 
   &__image {
     width: 30%;
@@ -11,6 +12,7 @@
 
   &__url {
     color: cadetblue;
+    margin-top: 0.3rem;
   }
 
   &__score {
@@ -21,6 +23,7 @@
 
   &__info {
     margin-top: 1rem;
-    // gap: 50px;
+    color: grey;
+    font-style: italic;
   }
 }

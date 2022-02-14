@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 // API
-import { getStoryIds, getStory } from '../../services/hnApi';
+import { getStoryIds } from '../../services/hnApi';
 
 // Components
 import { Story } from '../story/Story';
@@ -14,20 +14,9 @@ export const Stories = () => {
     getStoryIds().then(data => setStoryIds(data));
   }, []);
 
-  const mapIds = storyIds.map((storyId, key) => (
-    <Story
-      key={key}
-      title=''
-      storyScore='200'
-      storyUrl='www.google.com'
-      storyAuthor='Jane Doe'
-      storyTimestamp='12/02/12'
-      authorKarma='10'
-      storyId={storyId}
-    />
-  ));
+  const stories = storyIds.map((storyId, key) => <Story key={key} storyId={storyId} />);
 
-  return <div>{mapIds}</div>;
+  return <div>{stories}</div>;
 };
 
 // NOTES!!!!!

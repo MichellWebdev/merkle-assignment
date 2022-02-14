@@ -1,24 +1,22 @@
 import axios from 'axios';
 
-import { selectFields } from '../utils/selectFields';
+import { selectStoryFields, selectUserFields } from '../utils/selectFields';
 
 // TODO: rename file maybe
 
 export const baseUrl = 'https://hacker-news.firebaseio.com/v0/';
-export const newStoriesUrl = `${baseUrl}newstories.json`;
+export const topStoriesUrl = `${baseUrl}topstories.json`;
 export const storyUrl = `${baseUrl}item/`;
+export const userUrl = `${baseUrl}user/`;
 
-// Maybe do this here? run the function so you get 10 random stories on each render??
 export const getStory = async (storyId: number) => {
-  const result = await axios.get(`${storyUrl + storyId}.json`).then(({ data }: any) => data && selectFields(data));
+  const result = await axios.get(`${storyUrl + storyId}.json`).then(({ data }: any) => data && selectStoryFields(data));
 
   return result;
 };
 
-// When reading the assignment this should maybe be the topstories url instead?? I'm pretty sure
 export const getStoryIds = async () => {
-  // await axios get newStoriesUrl. Once you've gotton that, then get me the data and once you have it, return it
-  const result = await axios.get(newStoriesUrl).then(({ data }: any) => data);
+  const result = await axios.get(topStoriesUrl).then(({ data }: any) => data);
 
   return result;
 };

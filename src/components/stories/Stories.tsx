@@ -6,7 +6,6 @@ import { getStoryIds } from '../../services/hnApi';
 // Components
 import { Story } from '../story/Story';
 
-// StoriesData perhaps??
 export const Stories = () => {
   const [storyIds, setStoryIds] = useState([]);
 
@@ -14,7 +13,9 @@ export const Stories = () => {
     getStoryIds().then(data => setStoryIds(data));
   }, []);
 
-  const stories = storyIds.map((storyId, key) => <Story key={key} storyId={storyId} />);
+  const shuffleArray = storyIds.sort(() => 0.5 - Math.random());
+
+  const stories = shuffleArray.slice(0, 10).map((storyId, key) => <Story key={key} storyId={storyId} />);
 
   return <div>{stories}</div>;
 };

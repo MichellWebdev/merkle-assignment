@@ -1,3 +1,5 @@
-import { StoryItem } from '../components/story/Story';
+import { StoryItem, UserItem } from '../components/story/Story';
 
-export const selectFields = ({ id, by, url, time, title, score }: StoryItem) => ({ id, by, url, time, title, score });
+export const selectStoryFields = ({ id, by, url, time, title, score }: StoryItem) => ({ id, by, url, time, title, score });
+
+export const selectUserFields = ({ id, karma }: UserItem) => ({ id, karma });

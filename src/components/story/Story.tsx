@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { getStory } from '../../services/hnApi';
 import { getUser } from '../../services/userApi';
+import { selectStoryScore } from '../../utils/selectFields';
 
 import image from './../../utils/assets/dummy-image-one.jpg';
 
@@ -47,8 +48,8 @@ export const Story = ({ storyId, storyItem, userItem }: StoryProps) => {
   // }, []);
 
   // const userId: string = story.by;
+  // console.log('story', story);
 
-  // format so it's HH:MM DD-MM-YYYY/YY
   const date = new Date(story.time * 1000).toLocaleDateString('en-GB', { hour: 'numeric', minute: 'numeric' });
 
   return story && story.url ? (
@@ -69,7 +70,7 @@ export const Story = ({ storyId, storyItem, userItem }: StoryProps) => {
             <p>Karma: {'authorKarma'}</p>
           </div>
         </div>
-        <p className='story__score'>Story score: {story.score}</p>
+        {/* <p className='story__score'>Story score: {story.score}</p> */}
       </div>
     </div>
   ) : null;

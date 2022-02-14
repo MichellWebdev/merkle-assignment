@@ -48,8 +48,6 @@ export const Story = ({ storyId, storyItem, userItem }: StoryProps) => {
 
   // const userId: string = story.by;
 
-  console.log('stroy', story);
-
   // format so it's HH:MM DD-MM-YYYY/YY
   const date = new Date(story.time * 1000).toLocaleDateString('en-GB', { hour: 'numeric', minute: 'numeric' });
 

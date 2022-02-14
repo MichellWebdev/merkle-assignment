@@ -10,8 +10,6 @@ import { Story } from '../story/Story';
 export const Stories = () => {
   const [storyIds, setStoryIds] = useState([]);
 
-  // const [story, setStory] = useState({});
-
   useEffect(() => {
     getStoryIds().then(data => setStoryIds(data));
   }, []);
@@ -19,7 +17,7 @@ export const Stories = () => {
   const mapIds = storyIds.map((storyId, key) => (
     <Story
       key={key}
-      storyTitle='Students detect security breaches in popular apps'
+      title=''
       storyScore='200'
       storyUrl='www.google.com'
       storyAuthor='Jane Doe'

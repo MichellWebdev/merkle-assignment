@@ -7,36 +7,44 @@ import image from './../../utils/assets/dummy-image-one.jpg';
 import './Story.scss';
 
 interface StoryProps {
-  storyTitle: string;
+  title: string;
   storyScore: string;
   storyUrl: string;
   storyAuthor: string;
   storyTimestamp: string;
   // storyTimestamp: Date;
   authorKarma: string;
-  storyId: string;
+  storyId: number;
+  url?: string;
 }
 
 export const Story = ({
-  storyTitle,
+  title,
   storyScore,
   storyUrl,
   storyAuthor,
   storyTimestamp,
   authorKarma,
   storyId,
+  url,
 }: StoryProps) => {
-  useEffect(() => {}, []);
+  const [story, setStory] = useState({ url, title });
 
-  return (
+  useEffect(() => {
+    getStory(storyId).then(data => data && data.url && setStory(data));
+  }, []);
+
+  // console.log('story', story.url);
+
+  return story && story.url ? (
     <div className='page-container card'>
       <div className='direction-row'>
         <img className='story__image' src={image} alt='dummy-image' />
         <div className='direction-column story__title-container'>
-          <h2>{storyTitle}</h2>
+          <h2>{story.title}</h2>
           <p>{JSON.stringify(storyId)}</p>
-          <a className='story__url' href={storyUrl}>
-            {storyUrl}
+          <a className='story__url' href={story.url}>
+            {story.url}
           </a>
           <div className='direction-row story__info'>
             <p>Posted by: {storyAuthor}</p>
@@ -46,7 +54,10 @@ export const Story = ({
           </div>
         </div>
         <p className='story__score'>Story score: {storyScore}</p>
+        <p>{JSON.stringify(story)}</p>
       </div>
     </div>
+  ) : (
+    <div></div>
   );
 };

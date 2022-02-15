@@ -1,14 +1,23 @@
 @import '/src/utils/shared-styles.scss';
 
 .story {
+  &__image-container {
+    max-width: 20%;
+  }
+  &__image {
+    // width: 30%;
+  }
+
   &__title {
     text-decoration: none;
     color: black;
     margin-bottom: 1rem;
+    font-size: 1.2em;
+    font-weight: 600;
   }
 
-  &__image {
-    width: 30%;
+  &__container {
+    max-width: 80%;
   }
 
   &__url {

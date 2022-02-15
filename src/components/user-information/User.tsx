@@ -18,12 +18,9 @@ export const User = ({ userId, userItem }: UserProps) => {
     getUser(userId).then(data => data && data.id && setUser(data));
   }, []);
 
-  console.log('user', user);
-
   return (
-    <>
-      <p>Posted by: {userId}</p>
-      <p>Karma: {user.karma}</p>
-    </>
+    <p>
+      by: {userId} (Karma: {user.karma})
+    </p>
   );
 };

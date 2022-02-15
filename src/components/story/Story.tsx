@@ -35,20 +35,30 @@ export const Story = ({ storyId, storyItem }: StoryProps) => {
 
   return story && story.url ? (
     <div className='page-container card'>
-      <div className='direction-row'>
+      <div className='container-direction-row'>
+        <div className='display-none-large'>
+          <a href={story.url} className='story__title'>
+            {story.title}
+          </a>
+          <p className='story__score'>Story score: {story.score}</p>
+          <a className='story__url' href={story.url}>
+            {formatUrl(story.url)}
+          </a>
+        </div>
+
         <div className='direction-column story__image-container'>
           <img className='story__image' src={image} alt='dummy-image' />
         </div>
         <div className='direction-column story__container'>
-          <a href={story.url} className='story__title'>
-            <p>{story.title}</p>
+          <a href={story.url} className='story__title display-none-small'>
+            {story.title}
           </a>
-          <p>Story score: {story.score}</p>
-          <a className='story__url' href={story.url}>
+          <p className='story__score display-none-small'>Story score: {story.score}</p>
+          <a className='story__url display-none-small' href={story.url}>
             {formatUrl(story.url)}
           </a>
           <div className='direction-row story__info'>
-            <p>{formatDate(story.time)}</p>
+            <p>Posted: {formatDate(story.time)}</p>
             <User userId={story.by} />
           </div>
         </div>

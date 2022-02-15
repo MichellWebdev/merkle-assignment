@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 // API
-import { getStory, getStoryIds } from '../../services/hnApi';
+import { getStory, getStoryIds } from '../../services/storyApi';
 
 // Components
 import { Story } from '../story/Story';
@@ -23,7 +23,7 @@ export const Stories = () => {
 
   const stories = shuffleArray.map((storyId, key) => <Story key={key} storyId={storyId} />);
 
-  // console.log('stories', stories);
+  console.log('stories', stories);
 
   // const score = [20, 50, 10, 200, 103, 3];
   // score.sort(function (lowestScore, highestScore) {

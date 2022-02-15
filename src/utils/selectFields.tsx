@@ -1,4 +1,5 @@
-import { StoryItem, UserItem } from '../components/story/Story';
+import { StoryItem } from '../components/story/Story';
+import { UserItem } from '../components/user-information/User';
 
 interface StoryScore {
   id: string;

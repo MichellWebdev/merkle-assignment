@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-import { selectStoryFields } from '../utils/selectFields';
-
-// TODO: rename file maybe
+import { selectStoryFields, selectStoryScore } from '../utils/selectFields';
 
 export const baseUrl = 'https://hacker-news.firebaseio.com/v0/';
 export const topStoriesUrl = `${baseUrl}topstories.json`;
@@ -18,5 +16,28 @@ export const getStory = async (storyId: number) => {
 export const getStoryIds = async () => {
   const result = await axios.get(topStoriesUrl).then(({ data }: any) => data);
 
-  return result;
+  const shuffleArray: [] = result.sort(() => 0.5 - Math.random()).slice(0, 10);
+
+  console.log('shuffleArray', shuffleArray);
+
+  const storyItemList: any = [];
+
+  for (const story in shuffleArray) {
+    const storyItem = await axios
+      .get(`${storyUrl + shuffleArray[story]}.json`)
+      .then(({ data }: any) => data && selectStoryScore(data));
+    console.log('storyItem', storyItem);
+
+    storyItemList.push(storyItem.score);
+  }
+
+  console.log('storyItemList', storyItemList);
+
+  const orderByScore = storyItemList.sort(function (lowestScore: any, highestScore: any) {
+    return lowestScore - highestScore;
+  });
+
+  console.log('orderByScore', orderByScore);
+
+  return shuffleArray;
 };

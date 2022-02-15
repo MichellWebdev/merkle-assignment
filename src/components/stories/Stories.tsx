@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 // API
-import { getStoryIds, getStory } from '../../services/hnApi';
+import { getStory, getStoryIds } from '../../services/storyApi';
 
 // Components
 import { Story } from '../story/Story';
 
-// StoriesData perhaps??
 export const Stories = () => {
   const [storyIds, setStoryIds] = useState([]);
 
@@ -14,46 +13,30 @@ export const Stories = () => {
     getStoryIds().then(data => setStoryIds(data));
   }, []);
 
-  const mapIds = storyIds.map((storyId, key) => (
-    <Story
-      key={key}
-      title=''
-      storyScore='200'
-      storyUrl='www.google.com'
-      storyAuthor='Jane Doe'
-      storyTimestamp='12/02/12'
-      authorKarma='10'
-      storyId={storyId}
-    />
-  ));
+  const shuffleArray = storyIds.sort(() => 0.5 - Math.random()).slice(0, 10);
 
-  return <div>{mapIds}</div>;
+  const orderBy = shuffleArray.sort(function (lowestScore, highestScore) {
+    return lowestScore - highestScore;
+  });
+
+  // console.log('orderBy', orderBy);
+
+  const stories = shuffleArray.map((storyId, key) => <Story key={key} storyId={storyId} />);
+
+  console.log('stories', stories);
+
+  // const score = [20, 50, 10, 200, 103, 3];
+  // score.sort(function (lowestScore, highestScore) {
+  //   return lowestScore - highestScore;
+  // });
+
+  // console.log('stories', stories);
+
+  // const orderBy = stories.sort(function (lowestScore, highestScore) {
+  //   return lowestScore - highestScore;
+  // });
+
+  // console.log('orderBy', orderBy);
+
+  return <div>{stories}</div>;
 };
-
-// NOTES!!!!!
-
-// It returns as an array since all the story ids will be in an array from the API
-// storyIds (the getter) will be initialised as an empty array and then the setter will give the correct array with data when used
-// Usestate is used to store values
-// const [storyIds, setStoryIds] = useState([]);
-
-// const [story, setStory] = useState({});
-
-// // Use effect is used for updating the values in the use state
-// // the empty array might be able to be used for the random 10 stories
-// // Maybe not because the emtpy array is something it will look for and then rerender
-// useEffect(() => {
-//   getStoryIds().then(data => setStoryIds(data));
-
-//   // This is where I will do the random 10 - maybe??
-//   // getStory('20970623').then(data => setStory(data));
-//   // somewhere forEach story do something
-//   // getStory('20970623').then(data => setStory(data.title));
-// }, []);
-
-// return (
-//   <>
-//     {/* <p>{JSON.stringify(story)}</p> */}
-//     <p>{JSON.stringify(storyIds)}</p>
-//   </>
-// );

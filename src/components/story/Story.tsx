@@ -1,63 +1,58 @@
 import React, { useState, useEffect } from 'react';
 
-import { getStory } from '../../services/hnApi';
+// Api
+import { getStory } from '../../services/storyApi';
 
+// Utils
 import image from './../../utils/assets/dummy-image-one.jpg';
+import { formatDate, formatUrl } from '../../utils/formatting';
+
+// Components
+import { User } from '../user-information/User';
 
 import './Story.scss';
 
-interface StoryProps {
+export interface StoryItem {
   title: string;
-  storyScore: string;
-  storyUrl: string;
-  storyAuthor: string;
-  storyTimestamp: string;
-  // storyTimestamp: Date;
-  authorKarma: string;
-  storyId: number;
-  url?: string;
+  id: number;
+  score: number;
+  time: any;
+  url: string;
+  by: any;
 }
 
-export const Story = ({
-  title,
-  storyScore,
-  storyUrl,
-  storyAuthor,
-  storyTimestamp,
-  authorKarma,
-  storyId,
-  url,
-}: StoryProps) => {
-  const [story, setStory] = useState({ url, title });
+interface StoryProps {
+  storyItem?: StoryItem;
+  storyId: number;
+}
+
+export const Story = ({ storyId, storyItem }: StoryProps) => {
+  const [story, setStory] = useState({ ...storyItem });
 
   useEffect(() => {
     getStory(storyId).then(data => data && data.url && setStory(data));
   }, []);
 
-  // console.log('story', story.url);
-
   return story && story.url ? (
     <div className='page-container card'>
       <div className='direction-row'>
-        <img className='story__image' src={image} alt='dummy-image' />
-        <div className='direction-column story__title-container'>
-          <h2>{story.title}</h2>
-          <p>{JSON.stringify(storyId)}</p>
+        <div className='direction-column story__image-container'>
+          <img className='story__image' src={image} alt='dummy-image' />
+        </div>
+        <div className='direction-column story__container'>
+          <a href={story.url} className='story__title'>
+            <p>{story.title}</p>
+          </a>
+          <p>Story score: {story.score}</p>
           <a className='story__url' href={story.url}>
-            {story.url}
+            {formatUrl(story.url)}
           </a>
           <div className='direction-row story__info'>
-            <p>Posted by: {storyAuthor}</p>
-            <p>{storyTimestamp}</p>
-            <p>Karma: {authorKarma}</p>
-            <p className='story__score'>Story score: {storyScore}</p>
+            <p>{formatDate(story.time)}</p>
+            <User userId={story.by} />
           </div>
         </div>
-        <p className='story__score'>Story score: {storyScore}</p>
-        <p>{JSON.stringify(story)}</p>
       </div>
     </div>
-  ) : (
-    <div></div>
-  );
+  ) : null;
 };

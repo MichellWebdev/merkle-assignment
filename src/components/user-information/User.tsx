@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+
+// Api
 import { getUser } from '../../services/userApi';
 
 export interface UserItem {

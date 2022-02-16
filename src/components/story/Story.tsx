@@ -9,9 +9,9 @@ import { formatDate, formatUrl } from '../../utils/formatting';
 
 // Components
 import { User } from '../user-information/User';
+import { StorySmall } from './StorySmall';
 
 import './Story.scss';
-import { StorySmall } from './StorySmall';
 
 export interface StoryItem {
   title: string;

@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Utils
 import { formatUrl } from '../../utils/formatting';
 
 import './Story.scss';

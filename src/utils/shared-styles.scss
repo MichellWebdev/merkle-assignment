@@ -47,8 +47,8 @@ p {
 .card {
   background-color: white;
   border-radius: 15px;
-  padding: 2rem 1rem;
-  margin: 2rem auto;
+  padding: 1rem;
+  margin: 1rem auto;
   box-shadow: 3px 3px 7px 0px rgb(0 0 0 / 5%);
 }
 
@@ -79,7 +79,7 @@ p {
   }
 }
 .display-none-small {
-  @media (max-width: 650px) {
+  @media (max-width: 649px) {
     display: none;
   }
 }

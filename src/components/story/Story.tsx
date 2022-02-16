@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { getStory } from '../../services/storyApi';
 
 // Utils
-import image from './../../utils/assets/dummy-image-one.jpg';
+import { imageArray } from '../../utils/images';
 import { formatDate, formatUrl } from '../../utils/formatting';
 
 // Components
@@ -33,6 +33,8 @@ export const Story = ({ storyId, storyItem }: StoryProps) => {
     getStory(storyId).then(data => data && data.url && setStory(data));
   }, []);
 
+  const randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
+
   return story && story.url ? (
     <div className='page-container card'>
       <div className='container-direction-row'>
@@ -47,7 +49,7 @@ export const Story = ({ storyId, storyItem }: StoryProps) => {
         </div>
 
         <div className='direction-column story__image-container'>
-          <img className='story__image' src={image} alt='dummy-image' />
+          <img className='story__image' src={randomImage} alt='dummy-image' />
         </div>
         <div className='direction-column story__container'>
           <a href={story.url} className='story__title display-none-small'>

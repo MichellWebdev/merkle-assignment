@@ -4,11 +4,12 @@ import React, { useState, useEffect } from 'react';
 import { getStory } from '../../services/storyApi';
 
 // Utils
-import image from './../../utils/assets/dummy-image-one.jpg';
+import { imageArray } from '../../utils/images';
 import { formatDate, formatUrl } from '../../utils/formatting';
 
 // Components
 import { User } from '../user-information/User';
+import { StorySmall } from './StorySmall';
 
 import './Story.scss';
 
@@ -33,21 +34,15 @@ export const Story = ({ storyId, storyItem }: StoryProps) => {
     getStory(storyId).then(data => data && data.url && setStory(data));
   }, []);
 
+  const randomImage = imageArray[Math.floor(Math.random() * imageArray.length)];
+
   return story && story.url ? (
     <div className='page-container card'>
       <div className='container-direction-row'>
-        <div className='display-none-large'>
-          <a href={story.url} className='story__title'>
-            {story.title}
-          </a>
-          <p className='story__score'>Story score: {story.score}</p>
-          <a className='story__url' href={story.url}>
-            {formatUrl(story.url)}
-          </a>
-        </div>
+        <StorySmall storyTitle={story.title} storyUrl={story.url} storyScore={story.score} />
 
         <div className='direction-column story__image-container'>
-          <img className='story__image' src={image} alt='dummy-image' />
+          <img className='story__image' src={randomImage} alt='dummy-image' />
         </div>
         <div className='direction-column story__container'>
           <a href={story.url} className='story__title display-none-small'>

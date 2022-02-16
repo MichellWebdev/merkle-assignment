@@ -1,5 +1,5 @@
 export const formatUrl = (longUrl: string) => {
-  const createShortUrl = longUrl.slice(0, 35) + (longUrl && longUrl.length > 35 ? '...' : null);
+  const createShortUrl = longUrl.slice(0, 35) + (longUrl && longUrl.length > 35 ? '...' : '');
 
   return createShortUrl;
 };

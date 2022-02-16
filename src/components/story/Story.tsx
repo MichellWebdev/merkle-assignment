@@ -11,6 +11,7 @@ import { formatDate, formatUrl } from '../../utils/formatting';
 import { User } from '../user-information/User';
 
 import './Story.scss';
+import { StorySmall } from './StorySmall';
 
 export interface StoryItem {
   title: string;
@@ -38,15 +39,7 @@ export const Story = ({ storyId, storyItem }: StoryProps) => {
   return story && story.url ? (
     <div className='page-container card'>
       <div className='container-direction-row'>
-        <div className='display-none-large'>
-          <a href={story.url} className='story__title'>
-            {story.title}
-          </a>
-          <p className='story__score'>Story score: {story.score}</p>
-          <a className='story__url' href={story.url}>
-            {formatUrl(story.url)}
-          </a>
-        </div>
+        <StorySmall storyTitle={story.title} storyUrl={story.url} storyScore={story.score} />
 
         <div className='direction-column story__image-container'>
           <img className='story__image' src={randomImage} alt='dummy-image' />

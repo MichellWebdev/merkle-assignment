@@ -13,8 +13,6 @@ export const Stories = () => {
     getStoryIds().then(data => setStoryIds(data));
   }, []);
 
-  console.log('storyIds', storyIds);
-
   const stories = storyIds.map((storyId, key) => <Story key={key} storyId={storyId} />);
 
   return <div>{stories}</div>;

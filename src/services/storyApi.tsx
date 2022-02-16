@@ -24,7 +24,6 @@ export const getStoryIds = async () => {
     const storyItem = await axios
       .get(`${storyUrl + shuffleArray[story]}.json`)
       .then(({ data }: any) => data && selectStoryScore(data));
-    console.log('storyItem', storyItem);
 
     storyItemList.push(storyItem);
   }

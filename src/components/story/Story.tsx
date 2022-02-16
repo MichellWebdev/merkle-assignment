@@ -33,12 +33,6 @@ export const Story = ({ storyId, storyItem }: StoryProps) => {
     getStory(storyId).then(data => data && data.url && setStory(data));
   }, []);
 
-  // let scoreArray = [];
-
-  // scoreArray.push(story.score);
-
-  // console.log('Individual story', scoreArray);
-
   return story && story.url ? (
     <div className='page-container card'>
       <div className='container-direction-row'>

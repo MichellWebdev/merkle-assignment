@@ -18,8 +18,6 @@ export const getStoryIds = async () => {
 
   const shuffleArray: [] = result.sort(() => 0.5 - Math.random()).slice(0, 10);
 
-  console.log('shuffleArray', shuffleArray);
-
   const storyItemList: any = [];
 
   for (const story in shuffleArray) {
@@ -28,16 +26,19 @@ export const getStoryIds = async () => {
       .then(({ data }: any) => data && selectStoryScore(data));
     console.log('storyItem', storyItem);
 
-    storyItemList.push(storyItem.score);
+    storyItemList.push(storyItem);
   }
 
-  console.log('storyItemList', storyItemList);
-
-  const orderByScore = storyItemList.sort(function (lowestScore: any, highestScore: any) {
-    return lowestScore - highestScore;
+  const orderByScore = storyItemList.sort((lowestScore: any, highestScore: any) => {
+    return lowestScore.score - highestScore.score;
   });
 
-  console.log('orderByScore', orderByScore);
+  let orderedIds: any = [];
 
-  return shuffleArray;
+  orderByScore.forEach((e: any) => {
+    orderedIds.push(e.id);
+    return e.id;
+  });
+
+  return orderedIds;
 };
